@@ -1,9 +1,57 @@
-<h1>Hello There..</h1>
-{% for item in countrydata %}
-    {{item.country_id}}
-    <br/>
-    {{item.country_name}}
-    <br/>
-    {{item.country_logo}}
-    <hr>
-{% endfor %}
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        .match-card {
+            margin: 20px 0;
+        }
+        .club-logo {
+            width: 50px;
+            height: auto;
+        }
+        .match-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .match-info img {
+            margin: 0 10px;
+        }
+        .match-details {
+            text-align: center;
+        }
+    </style>
+    <div class="container">
+        <h1 class="text-center my-4">Match Schedule</h1>
+        <div class="row">
+            {% for match in data.matches %}
+            <div class="col-md-6">
+                <div class="card match-card">
+                    <div class="card-body">
+                        <div class="match-info">
+                            <div class="team">
+                                <img src="{{ match.hostLogo }}" class="club-logo" alt="{{ match.hostName }}">
+                                <h5>{{ match.hostName }}</h5>
+                            </div>
+                            <div class="match-details">
+                                <h5>{{ match.scheduledStartDate }}</h5>
+                                <h5>{{ match.scheduledStartTime }}</h5>
+                                <p>{{ match.stadium }}</p>
+                                <p>Referee: {{ match.referee }}</p>
+                            </div>
+                            <div class="team">
+                                <img src="{{ match.guestLogo }}" class="club-logo" alt="{{ match.guestName }}">
+                                <h5>{{ match.guestName }}</h5>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+        
+{% endblock %}
+        
